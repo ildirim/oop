@@ -1,0 +1,12 @@
+{
+    "require": {
+        "symfony/validator":         "2.1.*"
+    },
+    "autoload": {
+    	"psr-4": {
+    		"core\\": "core/",
+            "routes\\": "routes/",
+    		"app\\": "app/"
+    	}
+    }
+}
