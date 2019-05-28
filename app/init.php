@@ -2,10 +2,10 @@
 session_start();
 define('URL', realpath('.'));
 
-require URL . '/app/database.php';
+use core\DB;
+DB::connection();
 
 foreach(glob(URL . '/app/helpers/*.php') as $helper)
 {
 	require_once $helper;
 }
-

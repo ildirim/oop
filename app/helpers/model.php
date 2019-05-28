@@ -1,12 +1,12 @@
 <?php
-function where($column, $cmd)
+function select($sql, $cols)
 {
-	
+	$sql = str_replace('*', $cols, $sql);
+	return $sql;
 }
 
-function get()
+function where($sql, $col)
 {
-	$sql = "SELECT * FROM " . $this->table;
-	$result = $pdo->query($sql)->fetchAll();
-	return $result;
+	$sql .= " WHERE " . $col . "=?";
+	return $sql;
 }

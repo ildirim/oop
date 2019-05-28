@@ -2,19 +2,14 @@
 namespace app\controllers;
 
 use core\Controller;
-use app\models\Category;
+use app\models\Test;
 
 class HomeController extends Controller
 {
 	public function index()
 	{
-		var_dump(new Category);die();
-		$categories = Category::get();
-		$this->view('resources/categories/index', $data);
-	}
-
-	public function error()
-	{
-		$this->view('resources/error');
+		$test = new Test;
+		$data = $test->select('name')->where('id', 1)->get();
+		$this->view('resources/backend/index', $data);
 	}
 }

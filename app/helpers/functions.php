@@ -1,5 +1,5 @@
 <?php
-function exist_controller($controller, $controller_name)
+function existController($controller, $controller_name)
 {
 	if(!file_exists($controller . '.php'))
 	{
@@ -8,11 +8,20 @@ function exist_controller($controller, $controller_name)
 	}	
 }
 
-function exist_controller_method($controller, $controller_name, $method_name)
+function existControllerMethod($controller, $controller_name, $method_name)
 {
 	if(!method_exists($controller, $method_name))
 	{
 		echo $controller_name . '->' . $method_name . " not found!";
+		die;
+	}
+}
+
+function existFile($name)
+{
+	if(!file_exists($name . '.php'))
+	{
+		echo "This file is not exist";
 		die;
 	}
 }

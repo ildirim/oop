@@ -1,34 +1,22 @@
 <?php
 namespace core;
 
-use core \Helpers;
-class Route extends Helpers
+class Route
 {
-	public $url;
+	public static $url;
 
-	public function __construct()
+	public static function getUrl()
 	{
-		$this->url = trim($_SERVER['REQUEST_URI'], '/');
+		self::$url = trim($_SERVER['REQUEST_URI'], '/');
 	}
 
-	public function route($path)
+	public static function get($url, $path) : void
 	{
-		$explode = explode('@', $path);
-		$controller_name = $explode[0];
-		$method_name = $explode[1];
-		$controller =  'app\\controllers\\'.$controller_name;
-		exist_controller($controller, $controller_name);
-		exist_controller_method($controller, $controller_name, $method_name);
-		$controller = new $controller;
-		return $controller->$method_name();
-	}
-
-	public function get($url, $path)
-	{
-		switch ($this->url) 
+		self::getUrl();
+		switch (self::$url) 
 		{
 			case $url:
-				$this->route($path);
+				self::route($path);
 				die;
 			break;
 		}
@@ -36,6 +24,18 @@ class Route extends Helpers
 
 	public function post()
 	{
-		$this->route($path);
+		self::route($path);
+	}
+
+	private static function route($path)
+	{
+		$explode = explode('@', $path);
+		$controller_name = $explode[0];
+		$method_name = $explode[1];
+		$controller =  'app\\controllers\\'.$controller_name;
+		existController($controller, $controller_name);
+		existControllerMethod($controller, $controller_name, $method_name);
+		$controller = new $controller;
+		return $controller->$method_name();
 	}
 }
