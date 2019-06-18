@@ -36,22 +36,11 @@ class ComposerStaticInitd0b055ec0956e07b239301f8c181b636
         ),
     );
 
-    public static $prefixesPsr0 = array (
-        'S' => 
-        array (
-            'Symfony\\Component\\Validator' => 
-            array (
-                0 => __DIR__ . '/..' . '/symfony/validator',
-            ),
-        ),
-    );
-
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitd0b055ec0956e07b239301f8c181b636::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitd0b055ec0956e07b239301f8c181b636::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitd0b055ec0956e07b239301f8c181b636::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }

@@ -25,3 +25,10 @@ function existFile($name)
 		die;
 	}
 }
+
+function target($controller, $method)
+{
+	$controller = 'app\\controllers\\' . $controller;
+	$controller = new $controller;
+	return $controller->$method;
+}

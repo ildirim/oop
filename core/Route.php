@@ -12,19 +12,27 @@ class Route
 
 	public static function get($url, $path) : void
 	{
-		self::getUrl();
-		switch (self::$url) 
-		{
-			case $url:
-				self::route($path);
-				die;
-			break;
-		}
+		self::go('GET', $url, $path);
 	}
 
-	public function post()
+	public function post($url, $path)
 	{
-		self::route($path);
+		self::go('POST', $url, $path);
+	}
+
+	private static function go($name, $url, $path)
+	{
+		if($_SERVER['REQUEST_METHOD'] === $name)
+		{
+			self::getUrl();
+			switch (self::$url) 
+			{
+				case $url:
+					self::route($path);
+					die;
+				break;
+			}
+		}
 	}
 
 	private static function route($path)
