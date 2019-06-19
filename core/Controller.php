@@ -9,11 +9,9 @@ class Controller
 		require $url . '.php';
 	}
 
-	public function direct()
+	public function redirect($url, $message)
 	{
-		Route::get('', 'HomeController@index');
-		var_dump($_SERVER["HTTP_REFERER"]);die;
-		if (isset($_SERVER["HTTP_REFERER"]))
-	        header("Location: " . $_SERVER["HTTP_REFERER"]);
+		session_new('error', $message);
+		return header("Location: /" . $url);
 	}
 }

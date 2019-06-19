@@ -17,13 +17,15 @@ class HomeController extends Controller
 	public function store()
 	{
 		$validator = new Validate;
-		$rules = ['ad' => 'required|max:1',
-				  'soyad' => 'required|max:1'];
+		$rules = ['ad' => 'required|max:3|min:1',
+				  'soyad' => 'required|max:4|min:1'];
 		$validator->validate($_POST, $rules);
 		if($validator->fails())
 		{
 			$errors = $validator->getErrors();
-			$this->view('resources/backend/index', $errors);
+			$this->redirect('', $errors);
 		}
+		
+		$this->view('resources/backend/index', $data);
 	}
 }

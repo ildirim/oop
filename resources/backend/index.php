@@ -1,10 +1,4 @@
-<?php var_dump($errors); if(isset($errors)):   ?>
-	<div style="background-color: darkred; border-radius: 5px; border 1px solid red;">
-	<?php foreach($errors as $error): ?>
-		<div><?= $error; ?></div>
-	<?php endforeach ?>			
-	</div>
-<?php endif ?>			
+<?php show_message('error'); ?>			
 
 <form method="post" action="/store">
 	<input type="text" name="ad">

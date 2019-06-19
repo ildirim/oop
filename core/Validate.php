@@ -22,6 +22,8 @@ class Validate
 				$this->_required($validation, $iName, $requestFields);
 			else if(strpos($validation, 'max') !== false)
 				$this->_maxSize($iName, $validation, $requestFields);
+			else if(strpos($validation, 'min') !== false)
+				$this->_minSize($iName, $validation, $requestFields);
 		}
 	}
 
@@ -58,10 +60,21 @@ class Validate
 
 	private function _maxSize($iName, $validation, $requestFields)
 	{
-		$size = preg_match_all('!\d+!', $validation);
+		$size = preg_replace("/[^0-9\.]/", '', $validation);
 		if($size < strlen($requestFields[$iName]))
 		{
 			$this->errors[] = $iName . ' field max size must be ' . $size;
+			return false;
+		}
+		return true;
+	}
+
+	private function _minSize($iName, $validation, $requestFields)
+	{
+		$size = preg_replace("/[^0-9\.]/", '', $validation);
+		if($size > strlen($requestFields[$iName]))
+		{
+			$this->errors[] = $iName . ' field min size must be ' . $size;
 			return false;
 		}
 		return true;
